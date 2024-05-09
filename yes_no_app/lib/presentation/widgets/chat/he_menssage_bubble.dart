@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:yes_no_app/domain/entities/message.dart';
 class HeMenssageBubble extends StatelessWidget 
 {
-  const HeMenssageBubble({super.key});
+  final Message message;
+  const HeMenssageBubble({super.key, required this.message});
 
   @override
   Widget build(BuildContext context) 
@@ -19,14 +21,14 @@ class HeMenssageBubble extends StatelessWidget
             color: colors.primary,
             borderRadius: BorderRadius.circular(20)
           ),
-          child: const Padding
+          child:  Padding
           (
-            padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
-            child: Text('LUZ ANGELICA NOH GAMBOA', style: TextStyle(color: Colors.white),),
+            padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+            child: Text(message.text, style:const TextStyle(color: Colors.white),),
           ),
         ),
         const SizedBox(height: 5),
-        _ImageBubble(),
+        _ImageBubble(message.imageUrl!),
        const  SizedBox(height: 10,),
       ],
     );
@@ -37,6 +39,8 @@ class HeMenssageBubble extends StatelessWidget
 
 class _ImageBubble extends StatelessWidget
 {
+  final String imageUrl;
+  const _ImageBubble(this.imageUrl);
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -45,7 +49,7 @@ class _ImageBubble extends StatelessWidget
       borderRadius: BorderRadius.circular(20) ,
       child: Image.network
       (
-        'https://media1.tenor.com/m/3Vri745O0lIAAAAd/nero-black-clover.gif',
+        imageUrl,
         width: size.width * 0.7,
         height: 150,  
         fit: BoxFit.cover,
@@ -57,7 +61,7 @@ class _ImageBubble extends StatelessWidget
             width: size.width*0.7,
             height: 150,
             padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
-            child: const Text('Mi amor esta enviando una imagen'),
+            child: const Text('Mi amor está enviando una imagen'),
           );
         },
       )
